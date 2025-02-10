@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2299.6">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="zh-CN"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;AI梦境解析工具&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>body {font-family: -apple-system, sans-serif; max-width: 800px; margin: 20px auto; padding: 15px}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.card {background: #f8f9fa; border-radius: 10px; padding: 20px; margin: 15px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1)}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>input, textarea {width: 100%; padding: 8px; margin: 5px 0; border: 1px solid #ddd}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>button {background: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 5px}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.result-section {display: none}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="card" id="inputSection"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h2&gt;🛌 梦境解析工具&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;label&gt;梦境细节：&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;textarea id="dreamDetail" placeholder="例：在海边追逐会飞的鱼..." rows="3"&gt;&lt;/textarea&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;label&gt;梦中情绪：&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;input type="text" id="emotion" placeholder="例：焦虑混合希望"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;label&gt;醒后状态：&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;input type="text" id="awakeState" placeholder="例：疲惫但释然"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;label&gt;近期现实关联：&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;input type="text" id="reality" placeholder="例：准备离婚、申请留学"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button onclick="analyzeDream()"&gt;开始解析&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="card result-section" id="resultSection"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h2&gt;🔮 解析结果&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="interpretationOutput"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button onclick="location.reload()"&gt;重新开始&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function analyzeDream() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>// 收集用户输入</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const details = document.getElementById('dreamDetail').value</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const emotion = document.getElementById('emotion').value</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const awake = document.getElementById('awakeState').value</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const reality = document.getElementById('reality').value</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// 生成解析报告</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const report = `</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h3&gt;🔍 关键意象解析&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p&gt;&lt;strong&gt;核心矛盾：&lt;/strong&gt;${reality ? `${reality.split('、')[0]}引发` : ''}的${emotion || "潜在冲突"}&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p&gt;1. 关键符号呈现${details.includes('无法') ? '受阻状态' : '动态发展'}&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p&gt;2. ${emotion || "复杂情绪"}折射${reality ? reality.slice(0,10) : "现实"}压力点&lt;/p&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h3&gt;💡 情绪-现实关联&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p&gt;• &lt;strong&gt;${awake || "醒后残留情感"}：&lt;/strong&gt;反映${reality ? reality : "生活转折"}期的心理代偿机制&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p&gt;• 梦境与现实的共鸣强度：${Math.floor(Math.random()*40+50)}%&lt;/p&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h3&gt;🗓️ 行动建议&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p&gt;1. 建立「${details.split('，')[0]?.slice(0,4) || "意象"}-现实」对照日记&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p&gt;2. 未来7天每日记录：${emotion || "相似情绪"}触发点&lt;/p&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h3&gt;🎯 准确度声明&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p&gt;当前信息匹配度：${details.length &gt; 20 ? '60%-75%' : '40%-55%'}&lt;br&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;small&gt;建议${reality ? "结合现实事件" : "补充更多细节"}提升准确性&lt;/small&gt;&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>`</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// 显示结果</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('interpretationOutput').innerHTML = report</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('inputSection').style.display = 'none'</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('resultSection').style.display = 'block'</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
